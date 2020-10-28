@@ -1,7 +1,10 @@
 package com.prodes13.todolist;
 
 import com.prodes13.todolist.datamodel.TodoItem;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
@@ -20,6 +23,9 @@ public class Controller {
     @FXML
     private TextArea itemDetailsTextArea;
 
+    @FXML
+    private Label deadlineLabel;
+
     public void initialize() {
         TodoItem item1 = new TodoItem("Mai birthday card", "Buy a birthday card!", LocalDate.of(2018, Month.APRIL, 25));
         TodoItem item2 = new TodoItem("Item2", "This is text for item 2!", LocalDate.of(2018, Month.APRIL, 16));
@@ -34,19 +40,31 @@ public class Controller {
         todoItems.add(item4);
         todoItems.add(item5);
 
+        todoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TodoItem>() {
+            @Override
+            public void changed(ObservableValue<? extends TodoItem> observable, TodoItem oldValue, TodoItem newValue) {
+                if (newValue != null) {
+                    TodoItem item = todoListView.getSelectionModel().getSelectedItem();
+                    itemDetailsTextArea.setText(item.getDetails());
+                }
+            }
+        });
+
         todoListView.getItems().setAll(todoItems);
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        todoListView.getSelectionModel().selectFirst();
     }
 
     @FXML
     public void handleClickListView() {
         TodoItem item = todoListView.getSelectionModel().getSelectedItem();
         System.out.println(item);
-//        itemDetailsTextArea.setText(item.getDetails());
-        StringBuilder sb = new StringBuilder(item.getDetails());
-        sb.append("\n\n\n\n");
-        sb.append("Due: ");
-        sb.append(item.getDeadLine().toString());
-        itemDetailsTextArea.setText(sb.toString());
+        itemDetailsTextArea.setText(item.getDetails());
+//        StringBuilder sb = new StringBuilder(item.getDetails());
+//        sb.append("\n\n\n\n");
+//        sb.append("Due: ");
+//        sb.append(item.getDeadLine().toString());
+//        itemDetailsTextArea.setText(sb.toString());
+        deadlineLabel.setText(item.getDeadLine().toString());
     }
 }
