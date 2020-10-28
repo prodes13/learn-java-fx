@@ -13,7 +13,7 @@ public class Main extends Application {
 //        Layouts here!
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Learning Java FX");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(new Scene(root, 400, 300));
         primaryStage.show();
     }
 
