@@ -1,0 +1,7 @@
+Mai birthday card	Buy a birthday card!	25-04-2018
+Item2	This is text for item 2!	16-04-2018
+Item3	This is text for item 3!	05-12-2020
+Item2	This is text for item 2!	16-04-2018
+Item3	This is text for item 3!	05-12-2020
+Item4	This is text for item 4!	20-10-2020
+Item5	This is text for item 5!	12-11-2020
